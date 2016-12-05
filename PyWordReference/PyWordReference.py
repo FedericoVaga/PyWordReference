@@ -83,6 +83,7 @@ class Translator(object):
     two different languages
     """
     url_tmpl = "http://api.wordreference.com/{apikey}/json/{dictionary}/{term}"
+    url_web = "http://www.wordreference.com/{dictionary}/{term}"
 
     def __init__(self):
         pass
@@ -119,6 +120,8 @@ class Translator(object):
             raise Exception("Language {} not supported".format(lang_to))
 
         lang_dict = "{}{}".format(lang_from, lang_to)
+        web = self.url_web.format(dictionary=lang_dict,
+                                   term=term)
         url = self.url_tmpl.format(apikey="",
                                    dictionary=lang_dict,
                                    term=term)
@@ -127,7 +130,9 @@ class Translator(object):
 
         data = json.loads(r.text)
 
-        dictionary = {}
+        dictionary = {
+            "url": web,
+        }
         self.__add_translations(dictionary, data)
         self.__add_compounds(dictionary, data)
         return dictionary
