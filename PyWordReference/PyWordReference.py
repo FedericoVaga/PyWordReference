@@ -2,20 +2,20 @@ import requests
 import json
 
 available_lang = {
-"ar": "Arabic",
-"zh": "Chinese",
-"cz": "cz",
-"en": "English",
-"fr": "French",
-"gr": "Greek",
-"it": "Italian",
-"ja": "Japanese",
-"ko": "Korean",
-"pl": "Polish",
-"pt": "Portuguese",
-"ro": "Romanian",
-"es": "Spanish",
-"tr": "Turkish",
+    "ar": "Arabic",
+    "zh": "Chinese",
+    "cz": "cz",
+    "en": "English",
+    "fr": "French",
+    "gr": "Greek",
+    "it": "Italian",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "pl": "Polish",
+    "pt": "Portuguese",
+    "ro": "Romanian",
+    "es": "Spanish",
+    "tr": "Turkish",
 }
 
 
@@ -23,7 +23,7 @@ translations = ["FirstTranslation",
                 "SecondTranslation",
                 "ThirdTranslation",
                 "FourthTranslation",
-]
+                ]
 
 
 class Translation(object):
@@ -114,14 +114,14 @@ class Translator(object):
     def search(self, lang_from, lang_to, term):
         """It searches translations for a given term
         """
-        if not lang_from in available_lang:
+        if lang_from not in available_lang:
             raise Exception("Language {} not supported".format(lang_from))
-        if not lang_to in available_lang:
+        if lang_to not in available_lang:
             raise Exception("Language {} not supported".format(lang_to))
 
         lang_dict = "{}{}".format(lang_from, lang_to)
         web = self.url_web.format(dictionary=lang_dict,
-                                   term=term)
+                                  term=term)
         url = self.url_tmpl.format(apikey="",
                                    dictionary=lang_dict,
                                    term=term)
