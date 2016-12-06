@@ -6,6 +6,18 @@ The PyWordReference module includes the following objects:
 - Translator: it performs searches
 - Translation: it represents a single translation
 
+# Installation
+To install the module run:
+
+    # python setup.py install
+
+This command install the module in the environment in use by your python installation.
+
+To create a tarball for distribution
+
+    $ python setup.py sdist
+
+
 # Translator
 ## Usage
 The implementation is minimal and it's main purpose is to get

@@ -1,9 +1,0 @@
-To install the module run:
-
-    # python setup.py install
-
-This command install the module in the environment in use by your python installation.
-
-To create a tarball for distribution
-
-    $ python setup.py sdist
