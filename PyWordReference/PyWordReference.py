@@ -85,8 +85,8 @@ class Translator(object):
     url_tmpl = "http://api.wordreference.com/{apikey}/json/{dictionary}/{term}"
     url_web = "http://www.wordreference.com/{dictionary}/{term}"
 
-    def __init__(self):
-        pass
+    def __init__(self, api_key=""):
+        self.api_key = api_key
 
     def __add_translations(self, dictionary, data):
         dictionary["translation"] = []
@@ -122,7 +122,7 @@ class Translator(object):
         lang_dict = "{}{}".format(lang_from, lang_to)
         web = self.url_web.format(dictionary=lang_dict,
                                   term=term)
-        url = self.url_tmpl.format(apikey="",
+        url = self.url_tmpl.format(apikey=self.api_key,
                                    dictionary=lang_dict,
                                    term=term)
         r = requests.get(url)
