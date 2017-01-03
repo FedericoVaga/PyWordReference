@@ -11,7 +11,7 @@ To install the module run:
 
     # python setup.py install
 
-This command install the module in the environment in use by your python installation.
+This command installs the module in the environment in use by your python installation.
 
 To create a tarball for distribution
 
@@ -20,19 +20,19 @@ To create a tarball for distribution
 
 # Translator
 ## Usage
-The implementation is minimal and it's main purpose is to get
+The implementation is minimal and its main purpose is to get
 all the possible translations of a given term. Following an example:
 
     >>> import PyWordReference
     >>> wr = PyWordReference.Translator()
     >>> res = wr.search("en", "it", "hello")
 
-The Translator object can be used to perform searches. The syntex is very
+The Translator object can be used to perform searches. The syntax is very
 simple:
 
     def search(self, lang_from, lang_to, term):
 
-What the search method return is a Python dictionary with
+What the search method returns is a Python dictionary with
 the following structure:
 
     {
