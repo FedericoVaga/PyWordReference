@@ -1,5 +1,5 @@
-PyWordReference
-===============
+PyWordReference README
+======================
 PyWordReference is a Python module that uses the `WordReference API`_
 to get access to the wordreference's dictionaries.
 
@@ -8,50 +8,74 @@ The PyWordReference module includes the following objects:
 - Translator: it performs searches
 - Translation: it represents a single translation
 
+Documentation
+-------------
+You can generate a more detailed documentation (sphinx based) that includes
+also the API by running make from the doc directory.
+
+.. code:: sh
+
+  make -C doc html
+
 Compatibility
-=============
+-------------
 PyWordReference is complatible with *Python 3*. All the tests are performed
-on *Python 3*.
+on *Python 3*. The compatiblity with previous Python versions is not
+guaranteed.
 
 Installation
-============
+------------
 To install the module run:
 
-    # python3 setup.py install
+.. code:: sh
+
+  python3 setup.py install
 
 This command installs the module in the environment in use by your python installation.
 
 To create a tarball for distribution
 
-    $ python3 setup.py sdist
+.. code:: sh
 
+  python3 setup.py sdist
 
-Translator
-==========
+Unittest
+--------
+A dummy unittest is also available. It is really dummy, I did it just to
+practice with the Python unittest environment
+
+.. code:: sh
+
+  cd unittest
+  export WR_API_KEY=<your-api-key>
+  python3 -m unittest -v pywordreference
+
 Usage
 -----
-The implementation is minimal and its main purpose is to get
-all the possible translations of a given term. Following an example:
+The implementation is minimal and its main purpose is to get all
+the possible translations for a given term. The ``search`` method
+retrieves the translations.
 
-    >>> import PyWordReference
-    >>> wr = PyWordReference.Translator()
-    >>> res = wr.search("en", "it", "hello")
+.. code:: Python
 
-The Translator object can be used to perform searches. The syntax is very
-simple:
+  def search(self, lang_from, lang_to, term):
 
-    def search(self, lang_from, lang_to, term):
-
-What the search method returns is a Python dictionary with
+What the search ``search`` method returns is a Python dictionary with
 the following structure:
 
+.. code:: Python
+
     {
-    "translation" : [Translation(), ...],
-    "compound": [Translation(), ...],
+        "translation" : [Translation(), ],
+        "compound": [Translation(), ],
     }
 
-The most common usage of this module is to print the translation with
+The most common usage of this module is to print the ``Translation`` with
 a nice formatted string.
+
+Following a complete example
+
+.. code:: Python
 
     >>> import PyWordReference
     >>> wr = PyWordReference.Translator()
@@ -60,6 +84,11 @@ a nice formatted string.
     hello, UK: hallo [interj], (greeting)
             salve, buongiorno, buonasera [inter]
             ciao [inter], (informale)
+    >>> res = wr.search("it", "en", "ciao")
+    >>> print(res["translation"][0])
+    ciao [inter], informale (saluto amichevole)
+        hello [interj], (greeting)
+        hi, hey [interj], (informal)
 
 
 .. _`WordReference API`: http://www.wordreference.com/docs/api.aspx
