@@ -100,12 +100,14 @@ class Translator(object):
     url_tmpl = "http://api.wordreference.com/{apikey}/json/{dictionary}/{term}"
     url_web = "http://www.wordreference.com/{dictionary}/{term}"
 
-    def __init__(self, api_key=""):
+    def __init__(self, api_key=None):
         """It initialize a PyWordReference translator
         In order to be accessed, the wordreference API needs and *API key*.
         The object will raise an ``Exception`` if you do not provide a
         value for ``api_key``.
         """
+        if api_key is None:
+            raise Exception("A wordreference API key is necessary")
         self.api_key = api_key
 
     def __add_translations(self, dictionary, data):
