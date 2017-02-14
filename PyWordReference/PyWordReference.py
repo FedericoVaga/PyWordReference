@@ -1,3 +1,11 @@
+"""The module offers classes to access the wr_api_
+
+.. _wr_api: http://www.wordreference.com/docs/api.aspx
+"""
+__author__ = "Federico Vaga <federico.vaga@vaga.pv.it>"
+__license__ = "GPL v3"
+__docformat__ = 'reStructuredText'
+
 import requests
 import json
 
@@ -32,6 +40,12 @@ class Translation(object):
     The aim of the object is mainly to format the string representation
     """
     def __init__(self, term):
+        """It initialize a translation for the given term ``term``.
+        The ``term`` must be a dictionary compatible with the wordreference
+        API format for translations. The class performs a validation
+        on ``term`` and it raises ``Exception`` if it does not comply with
+        the word reference API format.
+        """
         self.term = term
 
         if "OriginalTerm" not in self.term:
@@ -79,6 +93,7 @@ class Translation(object):
 
 class Translator(object):
     """Wordreference translator
+
     The Translator object performs word translations between
     two different languages
     """
@@ -86,6 +101,11 @@ class Translator(object):
     url_web = "http://www.wordreference.com/{dictionary}/{term}"
 
     def __init__(self, api_key=None):
+        """It initialize a PyWordReference translator
+        In order to be accessed, the wordreference API needs and *API key*.
+        The object will raise an ``Exception`` if you do not provide a
+        value for ``api_key``.
+        """
         if api_key is None:
             raise Exception("A wordreference API key is necessary")
         self.api_key = api_key
@@ -114,7 +134,19 @@ class Translator(object):
                 dictionary["compound"].append(Translation(t[1]))
 
     def search(self, lang_from, lang_to, term):
-        """It searches translations for a given term
+        """
+        It searches for the translation of the given ``term`` from
+        one language (``lang_from``) to another (``lang_to``).
+
+        The search resoult is a dictionary with the following structure
+
+            {
+                "url" : "http://www.wordreference.com/{dictionary}/{term}"
+                "translation" : [Translation(), ...],
+                "compound": [Translation(), ...],
+            }
+
+        :returns: a dictionary that contains all the ``Translation``
         """
         if lang_from not in available_lang:
             raise Exception("Language {} not supported".format(lang_from))
