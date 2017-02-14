@@ -4,20 +4,26 @@ PyWordReference is a Python module that uses the `WordReference API`_
 to get access to the wordreference's dictionaries.
 
 The PyWordReference module includes the following objects:
+
 - Translator: it performs searches
 - Translation: it represents a single translation
+
+Compatibility
+=============
+PyWordReference is complatible with *Python 3*. All the tests are performed
+on *Python 3*.
 
 Installation
 ============
 To install the module run:
 
-    # python setup.py install
+    # python3 setup.py install
 
 This command installs the module in the environment in use by your python installation.
 
 To create a tarball for distribution
 
-    $ python setup.py sdist
+    $ python3 setup.py sdist
 
 
 Translator

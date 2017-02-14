@@ -145,7 +145,7 @@ class Translator(object):
         if lang_to not in available_lang:
             raise Exception("Language {} not supported".format(lang_to))
 
-        lang_dict = "{}{}".format(lang_from, lang_to)
+        lang_dict = "{_from}{_to}".format(_from=lang_from, _to=lang_to)
         web = self.url_web.format(dictionary=lang_dict,
                                   term=term)
         url = self.url_tmpl.format(apikey=self.api_key,
