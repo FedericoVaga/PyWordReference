@@ -138,7 +138,15 @@ class Translator(object):
         It searches for the translation of the given ``term`` from
         one language (``lang_from``) to another (``lang_to``).
 
-        :returns: a dictionary that contains all the translation
+        The search resoult is a dictionary with the following structure
+
+            {
+                "url" : "http://www.wordreference.com/{dictionary}/{term}"
+                "translation" : [Translation(), ...],
+                "compound": [Translation(), ...],
+            }
+
+        :returns: a dictionary that contains all the ``Translation``
         """
         if lang_from not in available_lang:
             raise Exception("Language {} not supported".format(lang_from))
