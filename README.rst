@@ -1,12 +1,14 @@
-# PyWordReference
-PyWordReference is a Python module that uses the wordreference API
+PyWordReference
+===============
+PyWordReference is a Python module that uses the `WordReference API`_
 to get access to the wordreference's dictionaries.
 
 The PyWordReference module includes the following objects:
 - Translator: it performs searches
 - Translation: it represents a single translation
 
-# Installation
+Installation
+============
 To install the module run:
 
     # python setup.py install
@@ -18,8 +20,10 @@ To create a tarball for distribution
     $ python setup.py sdist
 
 
-# Translator
-## Usage
+Translator
+==========
+Usage
+-----
 The implementation is minimal and its main purpose is to get
 all the possible translations of a given term. Following an example:
 
@@ -50,3 +54,6 @@ a nice formatted string.
     hello, UK: hallo [interj], (greeting)
             salve, buongiorno, buonasera [inter]
             ciao [inter], (informale)
+
+
+.. _`WordReference API`: http://www.wordreference.com/docs/api.aspx
