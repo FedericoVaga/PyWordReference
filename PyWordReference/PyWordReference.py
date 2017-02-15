@@ -35,12 +35,12 @@ translations = ["FirstTranslation",
 
 
 class Translation(object):
-    """Wordreference translation object
-    The Translation object represent a single translation for a given term.
+    """The Translation object represents a single translation for a given term.
     The aim of the object is mainly to format the string representation
+    with ``__str__()``
     """
     def __init__(self, term):
-        """It initialize a translation for the given term ``term``.
+        """It initializes a translation for the given term ``term``.
         The ``term`` must be a dictionary compatible with the wordreference
         API format for translations. The class performs a validation
         on ``term`` and it raises ``Exception`` if it does not comply with
@@ -92,17 +92,14 @@ class Translation(object):
 
 
 class Translator(object):
-    """Wordreference translator
-
-    The Translator object performs word translations between
-    two different languages
+    """The Translator object performs word translations between
+    two different languages.
     """
     url_tmpl = "http://api.wordreference.com/{apikey}/json/{dictionary}/{term}"
     url_web = "http://www.wordreference.com/{dictionary}/{term}"
 
     def __init__(self, api_key=None):
-        """It initialize a PyWordReference translator
-        In order to be accessed, the wordreference API needs and *API key*.
+        """In order to be accessed, the wordreference API needs an *API key*.
         The object will raise an ``Exception`` if you do not provide a
         value for ``api_key``.
         """
@@ -134,19 +131,20 @@ class Translator(object):
                 dictionary["compound"].append(Translation(t[1]))
 
     def search(self, lang_from, lang_to, term):
-        """
-        It searches for the translation of the given ``term`` from
+        """It searches for the translation of the given ``term`` from
         one language (``lang_from``) to another (``lang_to``).
 
-        The search resoult is a dictionary with the following structure
+        The search result is a dictionary with the following structure
 
-            {
-                "url" : "http://www.wordreference.com/{dictionary}/{term}"
-                "translation" : [Translation(), ...],
-                "compound": [Translation(), ...],
-            }
+        .. code-block:: python
 
-        :returns: a dictionary that contains all the ``Translation``
+          {
+            "url" : "http://www.wordreference.com/{dictionary}/{term}",
+            "translation" : [Translation(), ...],
+            "compound": [Translation(), ...],
+          }
+
+        :returns: a dictionary that contains all the :py:class:`Translation`
         """
         if lang_from not in available_lang:
             raise Exception("Language {} not supported".format(lang_from))
