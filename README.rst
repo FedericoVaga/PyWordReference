@@ -78,7 +78,7 @@ Following a complete example
 .. code:: Python
 
     >>> import PyWordReference
-    >>> wr = PyWordReference.Translator()
+    >>> wr = PyWordReference.Translator(api_key)
     >>> res = wr.search("en", "it", "hello")
     >>> print(res["translation"][0])
     hello, UK: hallo [interj], (greeting)
