@@ -34,6 +34,11 @@ translations = ["FirstTranslation",
                 ]
 
 
+class TranslatorException(Exception):
+    def __init__(self, msg):
+        super(self.__class__, self).__init__(msg)
+
+
 class Translation(object):
     """The Translation object represents a single translation for a given term.
     The aim of the object is mainly to format the string representation
@@ -49,11 +54,11 @@ class Translation(object):
         self.term = term
 
         if "OriginalTerm" not in self.term:
-            raise Exception("Missing OriginalTerm")
+            raise TranslatorException("Missing OriginalTerm")
         if "FirstTranslation" not in self.term:
-            raise Exception("Missing Translation")
+            raise TranslatorException("Missing Translation")
         if "Note" not in self.term:
-            raise Exception("Missing Note")
+            raise TranslatorException("Missing Note")
 
         self.orig = self.term["OriginalTerm"]
 
@@ -104,13 +109,13 @@ class Translator(object):
         value for ``api_key``.
         """
         if api_key is None:
-            raise Exception("A wordreference API key is necessary")
+            raise TranslatorException("A wordreference API key is necessary")
         self.api_key = api_key
 
     def __add_translations(self, dictionary, data):
         dictionary["translation"] = []
         if "term0" not in data:
-            return
+            raise TranslatorException("No entry found. Check API key. Or word spell")
 
         d = data["term0"]
         if "PrincipalTranslations" in d:
@@ -147,9 +152,9 @@ class Translator(object):
         :returns: a dictionary that contains all the :py:class:`Translation`
         """
         if lang_from not in available_lang:
-            raise Exception("Language {} not supported".format(lang_from))
+            raise TranslatorException("Language {} not supported".format(lang_from))
         if lang_to not in available_lang:
-            raise Exception("Language {} not supported".format(lang_to))
+            raise TranslatorException("Language {} not supported".format(lang_to))
 
         lang_dict = "{_from}{_to}".format(_from=lang_from, _to=lang_to)
         web = self.url_web.format(dictionary=lang_dict,
